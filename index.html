@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Stacja 2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Share Tech Mono', monospace;
+      background-color: #0a0a0a;
+      color: #00ffcc;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: black;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 120px auto;
+      padding: 30px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.75);
+      border: 2px solid #00ffcc;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,255,204,0.2);
+    }
+
+    h2 {
+      color: #ff0055;
+      font-size: 32px;
+      margin-bottom: 30px;
+      font-weight: bold;
+    }
+
+    p, code {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    input {
+      background: #000;
+      border: 2px solid #00ffcc;
+      color: #00ffcc;
+      padding: 10px;
+      margin-top: 10px;
+      width: 80%;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    button {
+      background: none;
+      border: 2px solid #00ffcc;
+      color: #00ffcc;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    button:hover {
+      background-color: #00ffcc;
+      color: #000;
+    }
+
+    .error {
+      color: red;
+      font-size: 18px;
+      margin-top: 20px;
+      animation: blink 1s step-start infinite;
+      font-weight: bold;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .decoded {
+      margin-top: 30px;
+      background-color: rgba(0,255,204,0.05);
+      padding: 20px;
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,255,204,0.3);
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="matrix">
+    <canvas id="matrixCanvas"></canvas>
+  </div>
+
+  <div class="container" id="taskContainer">
+    <h2>&gt; STACJA [2/4] – SZYFR: QWERTY</h2>
+    <p>Znaleziono zakodowany przekaz:</p>
+    <p><code style="font-size: 26px;">.... . .-.. .-.. --- / -.. .. -. --- ... .- ..- .-. ..- ...</code></p>
+    <p>Odszyfruj i wpisz treść:</p>
+    <input type="text" id="morseInput" placeholder="Twoja odpowiedź" />
+    <br />
+    <button onclick="checkMorse()">SPRAWDŹ</button>
+  </div>
+
+  <div class="container" id="morseResult" style="display:none"></div>
+
+  <script>
+    function checkMorse() {
+      const val = document.getElementById('morseInput').value.trim().toLowerCase();
+      const task = document.getElementById('taskContainer');
+      const result = document.getElementById('morseResult');
+
+      if (val === 'hello dinosaurus') {
+        task.style.display = 'none';
+        result.style.display = 'block';
+        result.innerHTML = 
+          <div class="decoded">
+            <p>&gt; Odszyfrowano wiadomość: "HELLO DINOSAURUS"</p>
+            <p>&gt; 🔓 Kod fragmentu: <strong>BHL</strong></p>
+            <p><em>„W Warszawie stoi stara Stodoła,<br>
+Gdzie muzyka w serca gra i woła.<br>
+Wśród świateł i rytmów każdy się bawi,<br>
+            Zgadnij, gdzie to miejsce, co cię rozpali?”<br><br>
+            Współrzędne: 50.0619°N, 19.9368°E.</em></p>
+          </div>
+        ;
+      } else {
+        task.style.display = 'none';
+        result.style.display = 'block';
+        result.innerHTML = 
+          <div class="error">
+            ███ SYSTEM ERROR ██<br>
+            Błąd dekodowania...<br>
+            <button onclick="location.reload()">&gt; RESETUJ STACJĘ</button>
+          </div>
+        ;
+      }
+    }
+
+
+ // MATRIX ANIMATION
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "01";
+    const fontSize = 30;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#00ffcc";
+      ctx.font = fontSize + "px 'Share Tech Mono'";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
