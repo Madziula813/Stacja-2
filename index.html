@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stacja 2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-color: #00ffd5;
+      --accent-color: #a93247;
+      --dark-bg: #0a0a0a;
+      --text-shadow: 0 0 10px var(--primary-color), 0 0 30px var(--primary-color);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background: var(--dark-bg);
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--primary-color);
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 25% 30%, rgba(255,20,60,0.12), transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(0,255,213,0.12), transparent 50%),
+        linear-gradient(135deg, #0a0a0a, #001f29, #000c17);
+      background-repeat: no-repeat;
+      animation: bgMove 30s linear infinite, dotsFlicker 4s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes bgMove {
+      0%, 100% { background-position: 20% 30%, 70% 80%, 0 0; }
+      50% { background-position: 22% 28%, 68% 82%, 100% 100%; }
+    }
+
+    @keyframes dotsFlicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.75; }
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      width: 90%;
+      max-width: 680px;
+      background: rgba(0, 0, 0, 0.65);
+      border: 2px solid var(--primary-color);
+      border-radius: 16px;
+      padding: 35px 40px;
+      text-align: center;
+      box-shadow:
+        0 0 12px var(--primary-color),
+        0 0 35px var(--primary-color),
+        0 0 70px var(--accent-color);
+      margin: 40px 15px;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      letter-spacing: 2px;
+      margin: 0 0 20px;
+      color: var(--accent-color);
+      text-shadow: 0 0 12px var(--accent-color), 0 0 30px var(--accent-color);
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid var(--accent-color);
+      animation:
+        typing 3.2s steps(28, end),
+        blink-caret 0.75s step-end infinite;
+      user-select: none;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      50% { border-color: transparent }
+    }
+
+    p {
+      font-size: 1.15rem;
+      line-height: 1.6;
+      margin-bottom: 35px;
+      text-shadow: var(--text-shadow);
+      text-align: center;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    strong {
+      color: var(--accent-color);
+      text-shadow: 0 0 10px var(--accent-color);
+      font-weight: bold;
+    }
+
+    button {
+      cursor: pointer;
+      background: transparent;
+      color: var(--primary-color);
+      border: 3px solid var(--primary-color);
+      padding: 12px 32px;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      box-shadow: 0 0 15px var(--primary-color), 0 0 25px var(--accent-color);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+      user-select: none;
+    }
+
+    button:hover {
+      background-color: var(--primary-color);
+      color: #000;
+      border-color: var(--accent-color);
+      box-shadow:
+        0 0 25px var(--primary-color),
+        0 0 60px var(--accent-color),
+        0 0 90px var(--accent-color);
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .digit {
+      position: fixed;
+      font-size: 22px;
+      color: var(--primary-color);
+      opacity: 0.13;
+      text-shadow: 0 0 6px var(--primary-color), 0 0 12px var(--primary-color);
+      user-select: none;
+      pointer-events: none;
+      will-change: transform;
+      font-weight: bold;
+    }
+
+    /* TABLETY */
+    @media (max-width: 768px) {
+      main {
+        padding: 28px 22px;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      button {
+        font-size: 1rem;
+        padding: 10px 25px;
+      }
+    }
+
+    /* TELEFONY */
+    @media (max-width: 480px) {
+      main {
+        padding: 22px 18px;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+        letter-spacing: 1px;
+      }
+
+      p {
+        font-size: 0.95rem;
+      }
+
+      button {
+        font-size: 0.95rem;
+        padding: 8px 22px;
+      }
+
+      .digit {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>&gt;[Stacja 2]</h1>
+    <p>
+      <strong>Graczu…</strong><br /><br />
+      Dotarłeś dalej, niż większość śmiałków. Pierwsza stacja została za tobą, ale prawdziwa gra dopiero się rozpoczyna.<br /><br /> 
+      Tutaj nie wystarczy już siła ani spryt. To przestrzeń, gdzie <strong>każdy bit ma znaczenie</strong>, a jeden zły ruch może otworzyć drzwi, których nie chcesz otworzyć.<br /><br />
+      <em>Ktoś obserwuje transmisję. Ktoś testuje twoją czujność.</em><br /><br />
+      🔐 Zadanie, które stoi przed tobą, to więcej niż wyzwanie – to brama. Złam szyfr, odkryj ukrytą ścieżkę, albo pozwól, by system pochłonął cię w wieczny loop.<br /><br />
+      <strong>Czy twoja logika wytrzyma presję? Czy potrafisz odróżnić iluzję od prawdy?</strong><br /><br />
+      Powiedz mi, Graczu: jesteś jeszcze uczestnikiem gry… czy już jej częścią?
+    </p>
+    <button onclick="goTo('stacja2.html')" aria-label="Przejdź do stacji 2">&gt; DALEJ</button>
+  </main>
+
+  <script>
+    function goTo(page) {
+      const btn = document.querySelector('button');
+      btn.disabled = true;
+      btn.textContent = "⏳ Ładowanie...";
+      setTimeout(() => {
+        window.location.href = page;
+      }, 700);
+    }
+
+    const digitsCount = window.innerWidth < 480 ? 0 : 30;
+    const digits = [];
+
+    function randomRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function createDigit() {
+      const digit = document.createElement('div');
+      digit.classList.add('digit');
+      digit.textContent = Math.floor(Math.random() * 10);
+      document.body.appendChild(digit);
+
+      const size = randomRange(20, 40);
+      digit.style.fontSize = size + 'px';
+
+      return {
+        el: digit,
+        x: randomRange(0, window.innerWidth),
+        y: randomRange(0, window.innerHeight),
+        vx: randomRange(-0.2, 0.2),
+        vy: randomRange(-0.2, 0.2),
+        size: size
+      };
+    }
+
+    function updateDigits() {
+      for (const d of digits) {
+        d.x += d.vx;
+        d.y += d.vy;
+
+        if (d.x < -d.size) d.x = window.innerWidth + d.size;
+        else if (d.x > window.innerWidth + d.size) d.x = -d.size;
+
+        if (d.y < -d.size) d.y = window.innerHeight + d.size;
+        else if (d.y > window.innerHeight + d.size) d.y = -d.size;
+
+        d.el.style.transform = `translate(${d.x}px, ${d.y}px)`;
+      }
+      requestAnimationFrame(updateDigits);
+    }
+
+    for (let i = 0; i < digitsCount; i++) {
+      digits.push(createDigit());
+    }
+    updateDigits();
+  </script>
+</body>
+</html>
